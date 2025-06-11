@@ -1,4 +1,3 @@
-
 #!/usr/bin/perl
 # UltraFast Theme - Main theme file for Devmin/Usermin
 # Version: 2.0.0
@@ -39,7 +38,7 @@ sub theme_header {
     my $hotkeys = get_theme_setting('theme_hotkeys', 1);
     my $custom_css = get_theme_setting('theme_custom_css', '');
     my $custom_js = get_theme_setting('theme_custom_js', '');
-    my $logo = get_theme_setting('theme_logo', '/lovable-uploads/0ffc6cf2-4a5d-4208-845a-0a7f7c387ff6.png');
+    my $logo = get_theme_setting('theme_logo', '/lovable-uploads/1a1fc027-aa78-40fe-a954-0445b3d823c6.png');
     
     # Start HTML output
     print "Content-type: text/html\n\n";
@@ -170,7 +169,105 @@ sub get_nav_icon {
     return $icons{$icon} || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
 }
 
-# ... keep existing code (generate_sidebar, theme_footer, and all other functions remain the same)
+# Generate sidebar content
+sub generate_sidebar {
+    print <<EOF;
+    <div class="sidebar-content">
+        <div class="sidebar-section">
+            <h2>Quick Links</h2>
+            <div class="sidebar-links">
+                <a href="/apache/" class="sidebar-link">
+                    <div class="sidebar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="sidebar-title">Apache Web Server</div>
+                </a>
+                
+                <a href="/mysql/" class="sidebar-link">
+                    <div class="sidebar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                        </svg>
+                    </div>
+                    <div class="sidebar-title">MySQL Database</div>
+                </a>
+                
+                <a href="/firewall/" class="sidebar-link">
+                    <div class="sidebar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="sidebar-title">Firewall</div>
+                </a>
+                
+                <a href="/backup-config/" class="sidebar-link">
+                    <div class="sidebar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                    </div>
+                    <div class="sidebar-title">Backup</div>
+                </a>
+            </div>
+        </div>
+    </div>
+EOF
+}
+
+# Generate theme footer
+sub theme_footer {
+    print <<EOF;
+    </main>
+    
+    <script>
+        // Load dashboard data
+        if (window.UltraFastTheme) {
+            setInterval(() => {
+                fetch('?action=get_system_status')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('cpu-usage').textContent = data.cpu_usage + '%';
+                        document.getElementById('memory-usage').textContent = data.memory_usage + '%';
+                        document.getElementById('disk-usage').textContent = data.disk_usage + '%';
+                        document.getElementById('uptime').textContent = formatUptime(data.uptime);
+                    });
+            }, 5000);
+        }
+        
+        function formatUptime(seconds) {
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            return days + 'd ' + hours + 'h ' + minutes + 'm';
+        }
+    </script>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about/" class="footer-link">About</a>
+                <a href="/contact/" class="footer-link">Contact</a>
+                <a href="/privacy/" class="footer-link">Privacy</a>
+            </div>
+            <div class="footer-copyright">Copyright &copy; 2023 DEVIT</div>
+        </div>
+    </footer>
+    
+    </body>
+</html>
+EOF
+}
 
 # Main execution
 if (!$in{'action'}) {
