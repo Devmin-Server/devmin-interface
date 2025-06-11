@@ -1,17 +1,17 @@
 
 #!/bin/bash
 
-# UltraFast Theme Build Script
+# UltraFast DEVIT Theme Build Script
 # This script packages the theme for distribution
 
 set -e
 
-THEME_NAME="ultrafast-theme"
+THEME_NAME="ultrafast-devit-theme"
 VERSION="2.0.0"
 BUILD_DIR="build"
 PACKAGE_NAME="${THEME_NAME}-${VERSION}.wbt.gz"
 
-echo "Building UltraFast Theme v${VERSION}..."
+echo "Building UltraFast DEVIT Theme v${VERSION}..."
 
 # Create build directory
 mkdir -p $BUILD_DIR
@@ -49,3 +49,10 @@ echo "1. Upload $PACKAGE_NAME to Devmin/Usermin"
 echo "2. Go to Webmin Configuration → Themes"
 echo "3. Click 'Install Theme' and select the uploaded file"
 echo "4. Apply the theme from the dropdown menu"
+echo ""
+echo "DEVIT Theme Features:"
+echo "- Modern Blaze UI-inspired design"
+echo "- Responsive layout with dark/light modes"
+echo "- Integrated DEVIT branding"
+echo "- Enhanced performance and usability"
+echo "- Comprehensive module support"
