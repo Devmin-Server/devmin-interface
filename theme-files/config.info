@@ -1,0 +1,13 @@
+
+line1=theme_logo,0
+line2=theme_color_scheme,8,Default,default,Blue,blue,Purple,purple,Green,green,Red,red,Dark,dark
+line3=theme_animations,1,1-Enable animations,0-Disable animations
+line4=theme_hotkeys,1,1-Enable hotkeys,0-Disable hotkeys
+line5=theme_notifications,1,1-Show notifications,0-Hide notifications
+line6=theme_sidebar_collapsed,1,1-Collapsed sidebar,0-Expanded sidebar
+line7=theme_code_highlighting,1,1-Enable code highlighting,0-Disable code highlighting
+line8=theme_terminal_dropdown,1,1-Enable terminal dropdown,0-Standard terminal
+line9=theme_custom_css,9,40,5
+line10=theme_custom_js,9,40,5
+line11=theme_update_check,1,1-Auto check for updates,0-Manual updates only
+line12=theme_mobile_optimized,1,1-Mobile optimizations,0-Desktop only
